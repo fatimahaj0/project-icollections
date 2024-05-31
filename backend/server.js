@@ -309,7 +309,20 @@ app.get('/user', (req, res) => {
     });
   });
 });
+app.put('/collection/:id', (req, res) => {
+  const collectionId = req.params.id;
+  const { name, description, categoryId, image } = req.body;
+  const sql = "UPDATE collection SET name = ?, description = ?, categoryId = ?, image = ? WHERE id = ?";
+  const values = [name, description, categoryId, image, collectionId];
 
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error("Error updating collection:", err);
+      return res.status(500).json({ error: "Error occurred while updating collection" });
+    }
+    return res.json({ success: true, message: "Collection updated successfully" });
+  });
+});
 
 app.delete('/items/:itemId', (req, res) => {
   const itemId = req.params.itemId;

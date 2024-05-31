@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams, useNavigate } from 'react-router-dom';
 
-const EditCollection = ({ collectionId }) => {
+const EditCollection = () => {
+  const { collectionId } = useParams();
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -11,6 +13,7 @@ const EditCollection = ({ collectionId }) => {
   const [file, setFile] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
   const [categories, setCategories] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (collectionId) {
@@ -67,10 +70,9 @@ const EditCollection = ({ collectionId }) => {
         image: imageUrl
       };
 
-     
       axios.put(`http://localhost:8081/collection/${collectionId}`, collectionData, {
         headers: {
-          'Authorization': `Bearer ${token}` 
+          'Authorization': `Bearer ${token}`
         }
       })
       .then(res => {
@@ -83,6 +85,7 @@ const EditCollection = ({ collectionId }) => {
           image: ''
         });
         setImageUrl('');
+        navigate(`/my-collection`);
       })
       .catch(err => console.error(err));
     } catch (error) {

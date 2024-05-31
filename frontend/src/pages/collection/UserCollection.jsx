@@ -60,11 +60,11 @@ const UserCollection = () => {
             <div className="col-md-4 mb-4" key={collection.id}>
               <div className="card h-100">
                 <img src={collection.image} className="card-img-top" alt={collection.name} />
-                <div className="card-body d-flex flex-column">
-                  <h5 className="card-title">{collection.name}</h5>
-                  <p className="card-text">{collection.description}</p>
-                  <p className="card-text"><strong>Category:</strong> {collection.category}</p>
-                  <div className="mt-auto">
+                <div className="card-body d-flex flex-column color-bg">
+                  <h5 className="card-title color-text">{collection.name}</h5>
+                  <p className="card-text color-text">{collection.description}</p>
+                  <p className="card-text color-text"><strong>Category:</strong> {collection.category}</p>
+                  <div className="mt-auto d-flex justify-content-between">
                     <button onClick={() => handleEdit(collection.id)} className="btn btn-dark me-2">Edit</button>
                     <button onClick={() => handleDelete(collection.id)} className="btn btn-dark">Delete</button>
                   </div>
